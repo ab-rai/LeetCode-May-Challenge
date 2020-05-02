@@ -1,2 +1,2 @@
 # LeetCode-May-Challenge
-My solution with comments for LeetCode May challenge
+This is Github repository of my solution with comments explaining each question of LeetCode May Challange
