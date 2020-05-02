@@ -10,6 +10,5 @@ I would update this repository once the 24 hour time period finishes for the exi
 of the challenge.
 
 ## Difficulty Rating:- 
--
-I have rated each question out of 10 for the difficulty level of the question. This is completely what I felt while solving the problem, 
- others opinion may differ.
+- I have rated each question out of 10 for the difficulty level of the question. This is completely what I felt while solving the problem, 
++ others opinion may differ.
