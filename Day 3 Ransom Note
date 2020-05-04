@@ -1,0 +1,27 @@
+/*
+Difficulty Level= 3/10 (basic knowledge of hashMap or using array for frequency)
+Given an arbitrary ransom note string and another string containing letters from all the magazines,
+write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+Each letter in the magazine string can only be used once in your ransom note.
+Note:
+You may assume that both strings contain only lowercase letters
+*/
+
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int freqRansom[26]={0};
+        int freqMagazine[26]={0};
+        for(char ch:ransomNote)
+            freqRansom[ch-'a']++; // storing the frequency of each character
+        for(char ch:magazine)
+            freqMagazine[ch-'a']++;
+        for(int i=0;i<26;i++)
+            if(freqRansom[i]>freqMagazine[i])// if freqRansom is greater then there is less character in the magazine
+                return false;                // to make the ransom note, so we would return false
+        return true;
+    }
+};
+
+//Time Complexity:-O(n+m)
+//Space Complexity:-O(1)
