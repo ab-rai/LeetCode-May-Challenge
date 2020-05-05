@@ -1,0 +1,16 @@
+/*
+Difficulty Rating=3/10 (basic bit manupulation)
+Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.
+*/
+class Solution {
+public:
+    int findComplement(int num) {
+        for(int i=0;i<31 && (1<<i) <= num;i++) // we only go until the most significant bit is 1 
+        {                                      // since we only have to complement till that, we are not require to touch leftmost zeros
+          num^= (1<<i); // EXOR operation with 1 reverse the digit
+        }               // eg. 1^1=0  and 0^1=1
+        return num;
+    }
+};
+//Time Complexity:-O(1)   loop will run maximum of 32 times for 32 bit Integers, so constant time complexity
+//Time Complexity:-O(1)
