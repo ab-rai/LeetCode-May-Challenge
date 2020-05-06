@@ -1,0 +1,21 @@
+/*
+Difficulty Level=3/10 (basic hashMap)
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+*/
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        int arr[26]={0};
+        for(char ch:s)
+            arr[ch-'a']++;  //storing the frequency of each character
+        for(int i=0;i<s.size();i++)
+        {
+            char ch=s[i];
+            if(arr[ch-'a']==1)  // if frequency of current character is 1 return this character
+                return i;
+        }
+        return -1;
+    }
+};
+//Time Complexity:-O(n)
+//Space Complexity:-O(1) only using an array of fixed size(26)
