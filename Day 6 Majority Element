@@ -1,0 +1,31 @@
+/*
+Difficulty Level=3 ( using hashMap (O(n) space and time) or sorting(O(nlogn) time or randomization (average case O(n) )
+Difficulty Level=4 ( very easy to do but non-trivial to do by Boyer-Moore Voting Algorithm )
+
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+You may assume that the array is non-empty and the majority element always exist in the array.
+*/
+
+class Solution {
+public:
+   int majorityElement(vector<int>& nums) {
+        
+        int len=nums.size();
+        int curr=nums[0];
+       int cnt=1;
+       for(int num:nums)
+       {
+           cnt+= ((num==curr)?1:-1); // finding the majority element
+           if(cnt<1)
+           {
+               cnt=1;
+               curr=num;
+           }
+       }
+       return curr; // since it is given is question that there is a majority element so no need to cross verify by counting frequency
+       
+    }
+};
+
+//TIme Complexity:- O(n)
+//Space Complexity:- O(1)
