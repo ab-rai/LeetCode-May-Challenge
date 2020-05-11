@@ -1,0 +1,40 @@
+/*
+Difficulty Level=5
+In a town, there are N people labelled from 1 to N.  There is a rumor that one of these people is secretly the town judge.
+If the town judge exists, then:
+The town judge trusts nobody.
+Everybody (except for the town judge) trusts the town judge.
+There is exactly one person that satisfies properties 1 and 2.
+You are given trust, an array of pairs trust[i] = [a, b] representing that the person labelled a trusts the person labelled b.
+If the town judge exists and can be identified, return the label of the town judge.  Otherwise, return -1.
+*/
+
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        set<int> from;
+        map<int,set<int> > mapTo;
+        int len=trust.size();
+        if(trust.size()==0)
+            return N;
+        for(int i=0;i<len;i++ )
+        {
+            from.insert(trust[i][0]);
+            mapTo[trust[i][1]].insert(trust[i][0]);
+        }
+        if(from.size()!=N-1)
+            return -1;
+        for(pair<int,set<int>> p:mapTo)
+        {
+            if( p.second.size()==N-1 && from.find(p.first)==from.end())
+            {
+                return p.first;
+            }
+        }
+        return -1;
+    }
+};
+
+// Time Complexity:-O(n)
+// Space Complexity:-O(n)
+ 
