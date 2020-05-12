@@ -1,0 +1,66 @@
+/*
+Dificulty Level=4
+An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
+Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, 
+and a pixel value newColor, "flood fill" the image.
+
+To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same 
+color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color as the starting pixel),
+and so on. Replace the color of all of the aforementioned pixels with the newColor.
+At the end, return the modified image.
+*/
+
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int rowSize=image.size();
+        if(rowSize==0)
+            return image;
+        int colSize=image[0].size();
+        if(image[sr][sc]==newColor)
+            return image;
+        stack<pair<int,int>> st;
+        st.push(make_pair(sr,sc));
+        int keyValue=image[sr][sc];
+        while(!st.empty())
+        {
+            int currRow=st.top().first;
+            int currCol=st.top().second;
+            st.pop();
+            image[currRow][currCol]=newColor;
+            if(currRow>0)
+            {
+                if(image[currRow-1][currCol]==keyValue)
+                {
+                    st.push(make_pair(currRow-1,currCol));
+                }
+            }
+            if(currCol>0)
+            {
+                if(image[currRow][currCol-1]==keyValue)
+                {
+                    st.push(make_pair(currRow,currCol-1));
+                }
+            }
+             if(currRow<rowSize-1)
+            {
+                if(image[currRow+1][currCol]==keyValue)
+                {
+                    st.push(make_pair(currRow+1,currCol));
+                }
+            }
+            if(currCol<colSize-1)
+            {
+                if(image[currRow][currCol+1]==keyValue)
+                {
+                    st.push(make_pair(currRow,currCol+1));
+                }
+            }
+             
+        }
+        return image;
+    }
+};
+
+//Time Complexity:-O(n) , here n is the number of pixels
+//Space Complexity:-O(n), since we are using stack 
