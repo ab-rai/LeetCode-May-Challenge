@@ -1,0 +1,38 @@
+/*
+Difficulty Level=5
+Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
+Note:
+The length of num is less than 10002 and will be ≥ k.
+The given num does not contain any leading zero.
+*/
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        string ans;
+        while(num.size()>0 && k--)
+        {
+            int i=0;
+            while(i<num.size()-1)
+            {
+                if(num[i]>num[i+1])
+                {
+                    ans=num.substr(0,i);
+                    ans+=num.substr(i+1);
+                    break;
+                }
+                i++;
+            }
+            if(i==num.size()-1)
+            {
+                ans=num.substr(0,num.size()-1);
+            }
+            num=ans;
+        }
+        int i=0;
+        while(num[i]=='0')
+            {
+                    num=num.substr(1);
+            }
+        return (num=="")?"0":num;
+    }
+};
