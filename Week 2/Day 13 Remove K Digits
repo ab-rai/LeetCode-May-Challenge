@@ -36,3 +36,4 @@ public:
         return (num=="")?"0":num;
     }
 };
+Could be solved using stack
