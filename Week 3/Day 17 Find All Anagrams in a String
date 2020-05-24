@@ -1,0 +1,58 @@
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+The order of output does not matter.
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> pfreq(26,0);
+        for(char ch:p)
+        {
+            pfreq[ch-'a']++;
+        }
+        vector<int> ans;
+        if(s.size()<p.size())
+            return ans;
+        vector<int> sfreq(26,0);
+        int plen=p.size();
+        int slen=s.size();
+        for(int i=0;i<plen;i++)
+        {
+            sfreq[s[i]-'a']++;
+        }
+        int i=plen-1;
+        int j;
+            for(j=0;j<26;j++)
+            {
+                if(pfreq[j]!=sfreq[j])
+                    break;
+            }
+            if(j==26)
+            {
+                ans.push_back(i+1-plen);
+                
+            }
+        
+        for(i=plen;i<slen;i++)
+        {
+            sfreq[s[i-plen]-'a']--;
+            sfreq[s[i]-'a']++;
+            
+            // cout<<"i="<<i<<s[i]<<endl;
+            int j;
+            for(j=0;j<26;j++)
+            {
+                if(pfreq[j]!=sfreq[j])
+                    break;
+            }
+            if(j==26)
+            {
+                ans.push_back(i+1-plen);
+                
+            }
+         }
+           
+        
+        return ans;
+    }
+};
