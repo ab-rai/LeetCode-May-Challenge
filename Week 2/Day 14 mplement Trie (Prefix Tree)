@@ -1,0 +1,95 @@
+Implement a trie with insert, search, and startsWith methods.
+
+class TrieNode{
+    public:
+    map<char,TrieNode*> dict;
+    bool isWord;
+    char key;
+    TrieNode(char ch)
+    {
+      //  dict=new map<char,TrieNode*>();
+        key=ch;
+        isWord=false;
+    }
+};
+class Trie {
+public:
+    /** Initialize your data structure here. */
+    TrieNode *head;
+    Trie() {
+        head=new TrieNode('#');
+    }
+    
+    /** Inserts a word into the trie. */
+    void insert(string word) {
+        TrieNode *currNode=head;
+        int i=0;
+        while(i<word.size())
+        {
+            if(currNode->dict.find(word[i])!=currNode->dict.end())
+            {
+                currNode=currNode->dict[word[i]];
+            }
+            else
+            {
+                TrieNode *newNode=new TrieNode(word[i]);
+                currNode->dict[word[i]]=newNode;
+                currNode=currNode->dict[word[i]];
+                
+            }
+            i++;
+        }
+        currNode->isWord=true;
+    }
+    
+    /** Returns if the word is in the trie. */
+    bool search(string word) {
+         TrieNode *currNode=head;
+        int i=0;
+        while(i<word.size())
+        {
+            if(currNode->dict.find(word[i])!=currNode->dict.end())
+            {
+                currNode=currNode->dict[word[i]];
+            }
+            else
+            {
+               return false;
+                
+            }
+            i++;
+        }
+        return currNode->isWord;
+    
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(string word) {
+         TrieNode *currNode=head;
+        int i=0;
+        while(i<word.size())
+        {
+            if(currNode->dict.find(word[i])!=currNode->dict.end())
+            {
+                currNode=currNode->dict[word[i]];
+            }
+            else
+            {
+               return false;
+                
+            }
+            i++;
+        }
+        return true;
+    
+        
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
