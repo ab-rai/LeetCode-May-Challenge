@@ -1,0 +1,38 @@
+We write the integers of A and B (in the order they are given) on two separate horizontal lines.
+Now, we may draw connecting lines: a straight line connecting two numbers A[i] and B[j] such that:
+
+A[i] == B[j];
+The line we draw does not intersect any other connecting (non-horizontal) line.
+Note that a connecting lines cannot intersect even at the endpoints: each number can only belong to one connecting line.
+
+Return the maximum number of connecting lines we can draw in this way.
+
+ 
+ class Solution {
+public:
+    int maxUncrossedLines(vector<int>& A, vector<int>& B) {
+        int Asize=A.size();
+        int Bsize=B.size();
+        vector<vector<int> > matrix;
+        for(int i=0;i<=Asize;i++)
+        {
+            vector<int> zeroVect(Bsize+1,0);
+            matrix.push_back(zeroVect);
+        }
+        for(int i=1;i<=Asize;i++)
+        {
+            for(int j=1;j<=Bsize;j++)
+            {
+                if(A[i-1]==B[j-1])
+                {
+                    matrix[i][j]=1+matrix[i-1][j-1];
+                }
+                else
+                {
+                    matrix[i][j]=max(matrix[i-1][j],matrix[i][j-1]);
+                }
+            }
+        }
+        return matrix[Asize][Bsize];
+    }
+};
