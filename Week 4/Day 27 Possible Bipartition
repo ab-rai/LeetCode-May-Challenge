@@ -1,0 +1,47 @@
+Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
+Each person may dislike some other people, and they should not go into the same group. 
+Formally, if dislikes[i] = [a, b], it means it is not allowed to put the people numbered a and b into the same group.
+Return true if and only if it is possible to split everyone into two groups in this way.
+
+ 
+ class Solution {
+public:
+    bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+        vector<vector<int>> graph;
+        for(int i=0;i<=N;i++)
+        {
+            vector<int> oneRow;
+            graph.push_back(oneRow);
+        }
+        for(int i=0;i<dislikes.size();i++)
+        {
+            graph[dislikes[i][0]].push_back(dislikes[i][1]);
+            
+        }
+        int len=N+1;
+        vector<int> color(len+1,-1);
+        for(int currRow=1;currRow<=len;currRow++)
+        {
+             stack<int> st;
+            st.push(currRow);
+            while(!st.empty())
+            {
+                int currNode=st.top();
+                st.pop();
+                if(color[currNode]==-1)
+                    color[currNode]=0;
+                for(int child:graph[currNode])
+                {
+                    if(color[child]==-1)
+                        {
+                        color[child]=color[currNode]^1;
+                        st.push(child);
+                        }
+                    else if(color[child]==color[currNode])
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+};
