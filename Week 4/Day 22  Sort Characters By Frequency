@@ -1,0 +1,28 @@
+Given a string, sort it in decreasing order based on the frequency of characters.
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        map<char,int> charFreq;
+       
+        for(char ch:s)
+        {
+            charFreq[ch]++;
+        }
+        vector<pair<int,char>> v;
+        for(pair<char,int> p:charFreq)
+        {
+            v.push_back({p.second,p.first});
+        }
+        sort(v.begin(),v.end(),greater());
+        string ans;
+        for(int i=0;i<v.size();i++)
+        {
+            int t=v[i].first;
+            char ch=v[i].second;
+            while(t--)
+            ans+=ch;
+        }
+        return ans;
+    }
+};
