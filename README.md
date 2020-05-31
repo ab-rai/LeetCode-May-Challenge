@@ -8,6 +8,6 @@ of the challenge.
 + I have rated each question out of 10 for the difficulty level of the question. This is completely what I felt while solving the problem, 
 + others opinion may differ.
 
-# I would add more details to my solutions one by one in future
++ I would add more details to my solutions one by one in future
 
 '''
